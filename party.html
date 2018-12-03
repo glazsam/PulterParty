@@ -40,7 +40,7 @@
             ms=checkTime(ms);
             var partyTime = document.getElementById("partyTime");
             partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд " + ms + " Миллисекунд";
-            t = setTimeout('startTime()', 500);
+            t = setTimeout('startTime()', 1);
 
             document.getElementById(htmlElementIdEnum.day).innerHTML = d;
             document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
