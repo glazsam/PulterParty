@@ -48,7 +48,7 @@
             var ms = result.getMilliseconds();
             m = checkTime(m);
             s = checkTime(s);
-            ms=checkTime(ms);
+            ms=checkTime(ms, true);
             t = setTimeout('startTime()', 1);
 
             document.getElementById(htmlElementIdEnum.day).innerHTML = d;
@@ -60,11 +60,16 @@
 
 
         }
-        function checkTime(i) {
+        function checkTime(i, is_milliseconds) {
+			var rval = i;
             if (i < 10) {
-                i = "0" + i;
+                rval = "0" + rval;
             }
-            return i;
+			if (is_milliseconds && i < 100) {
+				rval = "0" + rval;
+				console.log(rval);
+			}
+            return rval;
         }
 
         document.addEventListener("DOMContentLoaded", function (event) {
