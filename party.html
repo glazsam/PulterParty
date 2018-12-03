@@ -4,38 +4,50 @@
     <meta charset="UTF-8">
     <title>Purter Party Day</title>
     <style>
-        #timer{
+        #timer {
             margin: 20px auto;
             color: #333;
             font-family: Impact, Charcoal, sans-serif;
             font-size: 100px;
             cursor: default;
-			width: 770px;
+            width: 800px;
         }
-		#title{
-			margin: 20px auto;
+
+        #title {
+            margin: 20px auto;
             color: #333;
             font-family: Impact, Charcoal, sans-serif;
             cursor: default;
-			width: 400px;
-		}
-        #timer div{
+            width: 400px;
+        }
+
+        #timer div {
             display: inline;
         }
-		#timer #millisecond{
-			color: #bebebe;
-			font-size: 75px;
-		}
+
+        #timer #millisecond {
+            color: #bebebe;
+            font-size: 75px;
+        }
     </style>
     <script>
-        function startTime() {
 
+        var timerId;
+
+        var originDate = {
+            days: undefined,
+            hours: undefined,
+            minutes: undefined,
+            seconds: undefined
+        }
+
+        function startTime() {
             var htmlElementIdEnum = {
                 day: "day",
                 hour: "hour",
                 minute: "minute",
                 second: "second",
-				millisecond: "millisecond"
+                millisecond: "millisecond"
             }
 
 
@@ -49,16 +61,44 @@
             m = checkTime(m);
             s = checkTime(s);
             ms=checkTime(ms, true);
-            t = setTimeout('startTime()', 1);
-
-            document.getElementById(htmlElementIdEnum.day).innerHTML = d;
-            document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
-            document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
-            document.getElementById(htmlElementIdEnum.second).innerHTML = s;
-			document.getElementById(htmlElementIdEnum.millisecond).innerHTML = ms;
 
 
+            if (!originDate.days) {
+                originDate.days = d;
+                document.getElementById(htmlElementIdEnum.day).innerHTML = d;
+            };
+            if (!originDate.hours) {
+                originDate.hours = h;
+                document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
+            }
+            if (!originDate.minutes) {
+                originDate.minutes = m;
+                document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
+            }
+            if (!originDate.seconds) {
+                originDate.seconds = s;
+            }
+            if (originDate.days != d) {
+                originDate.days = d;
+                document.getElementById(htmlElementIdEnum.day).innerHTML = d;
+            }
+            if (originDate.hours != h) {
+                originDate.hours = h;
+                document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
+            }
+            if (originDate.minutes != m) {
+                originDate.minutes = m;
+                document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
+            }
+            if (originDate.seconds != s) {
+                originDate.seconds = s;
+                document.getElementById(htmlElementIdEnum.second).innerHTML = s;
+            }
 
+            document.getElementById(htmlElementIdEnum.millisecond).innerHTML = ms;
+
+
+            timerId = setTimeout(this.startTime, 1);
         }
         function checkTime(i, is_milliseconds) {
 			var rval = i;
@@ -81,13 +121,12 @@
     <h1 id="title">
         До корпоратива осталось
     </h1>
-
     <div id="timer">
         <div id="day"></div>&nbsp;:
         <div id="hour"></div>&nbsp;:
         <div id="minute"></div>&nbsp;:
         <div id="second"></div>&nbsp;.
-		<div id="millisecond"></div>
+        <div id="millisecond"></div>
     </div>
 
 
