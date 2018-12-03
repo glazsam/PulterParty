@@ -12,6 +12,13 @@
             cursor: default;
 			width: 770px;
         }
+		#title{
+			margin: 20px auto;
+            color: #333;
+            font-family: fantasy;
+            cursor: default;
+			width: 400px;
+		}
         #timer div{
             display: inline;
         }
@@ -42,8 +49,6 @@
             m = checkTime(m);
             s = checkTime(s);
             ms=checkTime(ms);
-            var partyTime = document.getElementById("partyTime");
-            partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд " + ms + " Миллисекунд";
             t = setTimeout('startTime()', 1);
 
             document.getElementById(htmlElementIdEnum.day).innerHTML = d;
@@ -68,10 +73,9 @@
     </script>
 </head>
 <body>
-    <h1>
+    <h1 id="title">
         До корпоратива осталось
     </h1>
-    <h2 id="partyTime"></h2>
 
     <div id="timer">
         <div id="day"></div>&nbsp;:
