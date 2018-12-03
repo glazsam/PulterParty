@@ -1,37 +1,76 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <script>
-    function startTime()
-	{
-  	var dayD = new Date(2018, 12, 14);
-    var result = new Date(dayD - new Date());
-    var d = result.getDate();
-    var h = result.getHours();
-		var m = result.getMinutes();
-		var s = result.getSeconds();
-		m=checkTime(m);
-		s=checkTime(s);
-    var partyTime =document.getElementById("partyTime");
-    partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд";
-    t=setTimeout('startTime()',500);
-	}
-	function checkTime(i)
-	{
-		if (i<10) {
-			i="0" + i;
-    }
-		return i;
-  }
-  </script>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #timer{
+            margin: 20px auto;
+            text-align: center;
+            color: #333;
+            font-family: fantasy;
+            font-size: 100px;
+            cursor: default;
+        }
+        #timer div{
+            display: inline;
+        }
+    </style>
+    <script>
+        function startTime() {
+
+            var htmlElementIdEnum = {
+                hour: "hour",
+                minute: "minute",
+                second: "second"
+            }
+
+
+            var dayD = new Date(2018, 12, 14);
+            var result = new Date(dayD - new Date());
+            var d = result.getDate();
+            var h = result.getHours();
+            var m = result.getMinutes();
+            var s = result.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            var partyTime = document.getElementById("partyTime");
+            partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд";
+            t = setTimeout('startTime()', 500);
+
+
+            document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
+            document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
+            document.getElementById(htmlElementIdEnum.second).innerHTML = s;
+
+
+
+        }
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            startTime();
+        });
+    </script>
 </head>
-<body onload="startTime()">
-  <h1>
-  До корпоратива осталось
-  </h1>
-  <h2 id="partyTime"></h2>
-    <iframe src="https://docs.google.com/spreadsheets/d/1mo6qfffZ92H_KkYzQtnpBL9BU9-Fi6CUe3mNRC1VXuk/edit#gid=1524227442" width="100%" height="800px"></iframe>
+<body>
+    <h1>
+        До корпоратива осталось
+    </h1>
+    <h2 id="partyTime"></h2>
+
+    <div id="timer">
+        <div id="hour"></div>&nbsp;:
+        <div id="minute"></div>&nbsp;:
+        <div id="second"></div>
+    </div>
+
+
+    <iframe src="https://docs.google.com/spreadsheets/d/1mo6qfffZ92H_KkYzQtnpBL9BU9-Fi6CUe3mNRC1VXuk/edit#gid=1524227442" style="width:100%; height:800px;"></iframe>
 </body>
 </html>
