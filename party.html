@@ -20,9 +20,11 @@
         function startTime() {
 
             var htmlElementIdEnum = {
+                day: "day",
                 hour: "hour",
                 minute: "minute",
                 second: "second"
+
             }
 
 
@@ -40,7 +42,7 @@
             partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд " + ms + " Миллисекунд";
             t = setTimeout('startTime()', 500);
 
-
+            document.getElementById(htmlElementIdEnum.day).innerHTML = d;
             document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
             document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
             document.getElementById(htmlElementIdEnum.second).innerHTML = s;
@@ -67,6 +69,7 @@
     <h2 id="partyTime"></h2>
 
     <div id="timer">
+        <div id="day"></div>&nbsp;:
         <div id="hour"></div>&nbsp;:
         <div id="minute"></div>&nbsp;:
         <div id="second"></div>
