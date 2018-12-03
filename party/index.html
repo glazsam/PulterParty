@@ -23,7 +23,12 @@
         }
 
         #timer div {
-            display: inline;
+            display: inline-block;
+        }
+
+        #timer div div{
+            min-width: 105px;
+            width:105px;
         }
 
         #timer #millisecond {
@@ -37,6 +42,10 @@
             background-image: url('img/42e88e6d6debf95b215ab55d8dd2f17c.gif');
         }
 
+        #timer div div.type_value{
+            position:absolute;
+            font-size: 15px;
+        }
 
     </style>
     
@@ -50,11 +59,36 @@
             До корпоратива осталось
         </h1>
         <div id="timer">
-            <div id="day"></div>&nbsp;:
-            <div id="hour"></div>&nbsp;:
-            <div id="minute"></div>&nbsp;:
-            <div id="second"></div>&nbsp;.
-            <div id="millisecond"></div>
+            <div>
+                <div class="type_value">
+                    дней
+                </div>
+                <div id="day"></div>
+            </div>&nbsp;:
+            <div>
+                <div class="type_value">
+                    часов
+                </div>
+                <div id="hour"></div>
+            </div>&nbsp;:
+            <div>
+                <div class="type_value">
+                    минут
+                </div>
+                <div id="minute"></div>
+            </div>&nbsp;:
+            <div>
+                <div class="type_value">
+                    секунд
+                </div>
+                <div id="second"></div>
+            </div>&nbsp;.
+            <div>
+                <div class="type_value">
+                    миллисекунд
+                </div>
+                <div id="millisecond"></div>
+            </div>
         </div>
 
 
@@ -108,6 +142,7 @@
             }
             if (!originDate.seconds) {
                 originDate.seconds = s;
+                document.getElementById(htmlElementIdEnum.second).innerHTML = s;
             }
             if (originDate.days != d) {
                 originDate.days = d;
