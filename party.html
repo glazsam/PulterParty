@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+    function startTime()
+	{
+  	var dayD = new Date(2018, 12, 14);
+    var result = new Date(dayD - new Date());
+    var d = result.getDate();
+    var h = result.getHours();
+		var m = result.getMinutes();
+		var s = result.getSeconds();
+		m=checkTime(m);
+		s=checkTime(s);
+    var partyTime =document.getElementById("partyTime");
+    partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд";
+    t=setTimeout('startTime()',500);
+	}
+	function checkTime(i)
+	{
+		if (i<10) {
+			i="0" + i;
+    }
+		return i;
+  }
+  </script>
+</head>
+<body onload="startTime()">
+  <h1>
+  До корпоратива осталось
+  </h1>
+  <h2 id="partyTime"></h2>
+</body>
+</html>
