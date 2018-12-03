@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon" type="image/ico" href="img/favicon.ico" />
     <meta charset="UTF-8">
     <title>Purter Party Day</title>
     <style>
@@ -60,7 +61,7 @@
             var ms = result.getMilliseconds();
             m = checkTime(m);
             s = checkTime(s);
-            ms=checkTime(ms, true);
+            ms = checkTime(ms, true);
 
 
             if (!originDate.days) {
@@ -101,14 +102,14 @@
             timerId = setTimeout(this.startTime, 1);
         }
         function checkTime(i, is_milliseconds) {
-			var rval = i;
+            var rval = i;
             if (i < 10) {
                 rval = "0" + rval;
             }
-			if (is_milliseconds && i < 100) {
-				rval = "0" + rval;
-				console.log(rval);
-			}
+            if (is_milliseconds && i < 100) {
+                rval = "0" + rval;
+                console.log(rval);
+            }
             return rval;
         }
 
