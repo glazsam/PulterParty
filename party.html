@@ -6,15 +6,19 @@
     <style>
         #timer{
             margin: 20px auto;
-            text-align: center;
             color: #333;
             font-family: fantasy;
             font-size: 100px;
             cursor: default;
+			width: 770px;
         }
         #timer div{
             display: inline;
         }
+		#timer #millisecond{
+			color: #bebebe;
+			font-size: 75px;
+		}
     </style>
     <script>
         function startTime() {
@@ -23,8 +27,8 @@
                 day: "day",
                 hour: "hour",
                 minute: "minute",
-                second: "second"
-
+                second: "second",
+				millisecond: "millisecond"
             }
 
 
@@ -46,6 +50,7 @@
             document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
             document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
             document.getElementById(htmlElementIdEnum.second).innerHTML = s;
+			document.getElementById(htmlElementIdEnum.millisecond).innerHTML = ms;
 
 
 
@@ -72,7 +77,8 @@
         <div id="day"></div>&nbsp;:
         <div id="hour"></div>&nbsp;:
         <div id="minute"></div>&nbsp;:
-        <div id="second"></div>
+        <div id="second"></div>&nbsp;.
+		<div id="millisecond"></div>
     </div>
 
 
