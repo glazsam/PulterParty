@@ -32,10 +32,12 @@
             var h = result.getHours();
             var m = result.getMinutes();
             var s = result.getSeconds();
+            var ms = result.getMilliseconds();
             m = checkTime(m);
             s = checkTime(s);
+            ms=checkTime(ms);
             var partyTime = document.getElementById("partyTime");
-            partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд";
+            partyTime.innerHTML = d + " Дней " + h + " Часов " + m + " Минут " + s + " Секунд " + ms + " Миллисекунд";
             t = setTimeout('startTime()', 500);
 
 
