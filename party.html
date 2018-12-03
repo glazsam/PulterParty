@@ -7,7 +7,7 @@
         #timer {
             margin: 20px auto;
             color: #333;
-            font-family: fantasy;
+            font-family: Impact, Charcoal, sans-serif;
             font-size: 100px;
             cursor: default;
             width: 800px;
@@ -16,7 +16,7 @@
         #title {
             margin: 20px auto;
             color: #333;
-            font-family: fantasy;
+            font-family: Impact, Charcoal, sans-serif;
             cursor: default;
             width: 400px;
         }
@@ -60,7 +60,7 @@
             var ms = result.getMilliseconds();
             m = checkTime(m);
             s = checkTime(s);
-            ms = checkTime(ms);
+            ms=checkTime(ms, true);
 
 
             if (!originDate.days) {
@@ -94,17 +94,22 @@
                 originDate.seconds = s;
                 document.getElementById(htmlElementIdEnum.second).innerHTML = s;
             }
-            
+
             document.getElementById(htmlElementIdEnum.millisecond).innerHTML = ms;
 
 
             timerId = setTimeout(this.startTime, 1);
         }
-        function checkTime(i) {
+        function checkTime(i, is_milliseconds) {
+			var rval = i;
             if (i < 10) {
-                i = "0" + i;
+                rval = "0" + rval;
             }
-            return i;
+			if (is_milliseconds && i < 100) {
+				rval = "0" + rval;
+				console.log(rval);
+			}
+            return rval;
         }
 
         document.addEventListener("DOMContentLoaded", function (event) {
