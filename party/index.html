@@ -88,6 +88,11 @@
 
     </div>
     <div class="main">
+		<div>
+			<audio id="music" loop>
+				<source src="tetris.mp3" type="audio/mpeg">
+			</audio>
+		</div>
         <h1 id="title">
             До корпоратива осталось
         </h1>
@@ -135,6 +140,19 @@
     
     <script>
 
+		var music = document.getElementById("music");
+		window.addEventListener('click', function() {
+		 if(music.paused) 
+		 {
+			music.currentTime = 8;
+			music.play();
+		 } 
+		 else{
+			music.pause();
+		 }
+		});
+		
+		
         var timerId;
 
         var originDate = {
@@ -153,8 +171,7 @@
         }
 
 
-        function startTime() {
-
+        function startTime() {	
             var dayD = new Date(2018, 12, 14);
             var result = new Date(dayD - new Date());
             var d = result.getDate();
