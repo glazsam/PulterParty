@@ -7,7 +7,7 @@
     <style>
         #timer {
             margin: 20px auto;
-            color: #333;
+            color: #39bdcc;
             font-family: Impact, Charcoal, sans-serif;
             font-size: 100px;
             cursor: default;
@@ -16,23 +16,143 @@
 
         #title {
             margin: 20px auto;
-            color: #333;
             font-family: Impact, Charcoal, sans-serif;
             cursor: default;
-            width: 400px;
+            width: 100%;
+            color: #455866;
+            font-size:50px;
+            text-align: center;
         }
 
         #timer div {
-            display: inline;
+            display: inline-block;
         }
 
-        #timer #millisecond {
-            color: #bebebe;
-            font-size: 75px;
+        #timer div div{
+            min-width: 105px;
+            width:105px;
+        }
+
+            #timer div div:not(.type_value){
+                text-align:right;
+            }
+
+            #timer #millisecond {
+                color: #455866;
+                font-size: 75px;
+            }
+
+        .header{
+            width: 100%;
+            height: 30px;
+            background-image: url('img/42e88e6d6debf95b215ab55d8dd2f17c.gif');
+        }
+
+        #timer div div.type_value{
+            color: #455866;
+            position:absolute;
+            font-size: 15px;
+        }
+
+
+        .default-button {
+            border: 2px solid #39bdcc;
+            color: #39bdcc;
+            font: 18px/10px Impact, Charcoal, sans-serif;
+            height: 34px;
+            padding: 10px 25px;
+            vertical-align: middle;
+            background: none;
+            position: relative;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+            .default-button:hover {
+                color: #fff;
+                background: #39bdcc;
+                border: 2px solid #39bdcc;
+            }
+
+
+        #title {
+            
         }
     </style>
+    
+</head>
+<body>
+    <div class="header">
+
+    </div>
+    <div class="main">
+		<div>
+			<audio id="music" loop>
+				<source src="tetris.mp3" type="audio/mpeg">
+			</audio>
+		</div>
+        <h1 id="title">
+            До корпоратива осталось
+        </h1>
+        <div id="timer">
+            <div>
+                <div class="day type_value">
+                </div>
+                <div id="day"></div>
+            </div>&nbsp;:
+            <div>
+                <div class="hour type_value">
+                </div>
+                <div id="hour"></div>
+            </div>&nbsp;:
+            <div>
+                <div class="minute type_value">
+                </div>
+                <div id="minute"></div>
+            </div>&nbsp;:
+            <div>
+                <div class="second type_value">
+                </div>
+                <div id="second"></div>
+            </div>&nbsp;.
+            <div>
+                <div class="millisecond type_value">
+                    миллисекунды
+                </div>
+                <div id="millisecond"></div>
+            </div>
+        </div>
+
+        <div style="text-align:center;">
+            <img src="img/mascotte.png" />
+        </div>
+
+        <div style="text-align:center; margin-top:50px;">
+            <a href="https://docs.google.com/spreadsheets/d/1mo6qfffZ92H_KkYzQtnpBL9BU9-Fi6CUe3mNRC1VXuk/edit#gid=1524227442" target="_blank" class="default-button">Посмотреть смету</a>
+        </div>
+
+
+
+
+    </div>
+    
     <script>
 
+		var music = document.getElementById("music");
+		window.addEventListener('click', function() {
+		 if(music.paused) 
+		 {
+			music.currentTime = 8;
+			music.play();
+		 } 
+		 else{
+			music.pause();
+		 }
+		});
+		
+		
         var timerId;
 
         var originDate = {
@@ -42,16 +162,16 @@
             seconds: undefined
         }
 
-        function startTime() {
-            var htmlElementIdEnum = {
-                day: "day",
-                hour: "hour",
-                minute: "minute",
-                second: "second",
-                millisecond: "millisecond"
-            }
+        var htmlElementIdEnum = {
+            day: "day",
+            hour: "hour",
+            minute: "minute",
+            second: "second",
+            millisecond: "millisecond"
+        }
 
 
+        function startTime() {	
             var dayD = new Date(2018, 12, 14);
             var result = new Date(dayD - new Date());
             var d = result.getDate();
@@ -59,41 +179,51 @@
             var m = result.getMinutes();
             var s = result.getSeconds();
             var ms = result.getMilliseconds();
+            h = checkTime(h);
             m = checkTime(m);
             s = checkTime(s);
             ms = checkTime(ms, true);
 
-
             if (!originDate.days) {
                 originDate.days = d;
                 document.getElementById(htmlElementIdEnum.day).innerHTML = d;
+                setNameValue(htmlElementIdEnum.day, d);
             };
             if (!originDate.hours) {
                 originDate.hours = h;
                 document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
+                setNameValue(htmlElementIdEnum.hour, h);
             }
             if (!originDate.minutes) {
                 originDate.minutes = m;
                 document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
+                setNameValue(htmlElementIdEnum.minute, m);
+
             }
             if (!originDate.seconds) {
                 originDate.seconds = s;
+                document.getElementById(htmlElementIdEnum.second).innerHTML = s;
+                setNameValue(htmlElementIdEnum.second, s);
             }
             if (originDate.days != d) {
                 originDate.days = d;
                 document.getElementById(htmlElementIdEnum.day).innerHTML = d;
+                setNameValue(htmlElementIdEnum.day, d);
             }
             if (originDate.hours != h) {
                 originDate.hours = h;
                 document.getElementById(htmlElementIdEnum.hour).innerHTML = h;
+                setNameValue(htmlElementIdEnum.hour, h);
             }
             if (originDate.minutes != m) {
                 originDate.minutes = m;
                 document.getElementById(htmlElementIdEnum.minute).innerHTML = m;
+                setNameValue(htmlElementIdEnum.minute, m);
             }
             if (originDate.seconds != s) {
                 originDate.seconds = s;
                 document.getElementById(htmlElementIdEnum.second).innerHTML = s;
+                setNameValue(htmlElementIdEnum.second, s);
             }
 
             document.getElementById(htmlElementIdEnum.millisecond).innerHTML = ms;
@@ -108,29 +238,49 @@
             }
             if (is_milliseconds && i < 100) {
                 rval = "0" + rval;
-                console.log(rval);
             }
             return rval;
+        }
+
+        function getNoun(number, one, two, five) {
+            number = Math.abs(number);
+            number %= 100;
+            if (number >= 5 && number <= 20) {
+                return five;
+            }
+            number %= 10;
+            if (number == 1) {
+                return one;
+            }
+            if (number >= 2 && number <= 4) {
+                return two;
+            }
+            return five;
+        } 
+
+        function setNameValue(name, value) {
+            switch (name) {
+
+                case htmlElementIdEnum.day:
+                    document.getElementsByClassName(htmlElementIdEnum.day)[0].innerHTML = getNoun(value, "день", "дня", "дней");
+                    break;
+                case htmlElementIdEnum.hour:
+                    document.getElementsByClassName(htmlElementIdEnum.hour)[0].innerHTML = getNoun(value, "час", "часа", "часов");
+                    break;
+                case htmlElementIdEnum.minute:
+                    document.getElementsByClassName(htmlElementIdEnum.minute)[0].innerHTML = getNoun(value, "минута", "минуты", "минут");
+                    break;
+                case htmlElementIdEnum.second:
+                    document.getElementsByClassName(htmlElementIdEnum.second)[0].innerHTML = getNoun(value, "секунда", "секунды", "секунд");
+                    break;
+            }
+
+            
         }
 
         document.addEventListener("DOMContentLoaded", function (event) {
             startTime();
         });
     </script>
-</head>
-<body>
-    <h1 id="title">
-        До корпоратива осталось
-    </h1>
-    <div id="timer">
-        <div id="day"></div>&nbsp;:
-        <div id="hour"></div>&nbsp;:
-        <div id="minute"></div>&nbsp;:
-        <div id="second"></div>&nbsp;.
-        <div id="millisecond"></div>
-    </div>
-
-
-    <iframe src="https://docs.google.com/spreadsheets/d/1mo6qfffZ92H_KkYzQtnpBL9BU9-Fi6CUe3mNRC1VXuk/edit#gid=1524227442" style="width:100%; height:800px;"></iframe>
 </body>
 </html>
