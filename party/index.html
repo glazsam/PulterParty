@@ -24,6 +24,13 @@
             text-align: center;
         }
 
+        #sound {
+            color: #39bdcc;
+            font-family: Impact, Charcoal, sans-serif;
+            font-size: 30px;
+            text-align: center;
+        }
+
         #timer div {
             display: inline-block;
         }
@@ -128,6 +135,10 @@
         <div style="text-align:center;">
             <img src="img/mascotte.png" />
         </div>
+        <div id="sound">
+            <input type="checkbox" id="mute" name="mute" title="Добаввить праздника">
+            <label for="mute">Добаввить праздника!</label>
+        </div>
 
         <div style="text-align:center; margin-top:50px;">
             <a href="https://docs.google.com/spreadsheets/d/1mo6qfffZ92H_KkYzQtnpBL9BU9-Fi6CUe3mNRC1VXuk/edit#gid=1524227442" target="_blank" class="default-button">Посмотреть смету</a>
@@ -140,15 +151,16 @@
     
     <script>
 
-		var music = document.getElementById("music");
-		window.addEventListener('click', function() {
-		 if(music.paused) 
+        var music = document.getElementById("music");
+        var mute = document.getElementById("mute");
+		mute.addEventListener('change', function() {
+		 if(mute.checked) 
 		 {
-			music.currentTime = 8;
 			music.play();
 		 } 
 		 else{
-			music.pause();
+            music.pause();
+            music.currentTime = 0;
 		 }
 		});
 		
@@ -172,13 +184,13 @@
 
 
         function startTime() {	
-            var dayD = new Date(2018, 12, 14);
+            var dayD = new Date(2018, 11, 14, 15, 00, 00);
             var result = new Date(dayD - new Date());
-            var d = result.getDate();
-            var h = result.getHours();
-            var m = result.getMinutes();
-            var s = result.getSeconds();
-            var ms = result.getMilliseconds();
+            var d = result.getUTCDate();
+            var h = result.getUTCHours();
+            var m = result.getUTCMinutes();
+            var s = result.getUTCSeconds();
+            var ms = result.getUTCMilliseconds();
             h = checkTime(h);
             m = checkTime(m);
             s = checkTime(s);
