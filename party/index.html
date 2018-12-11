@@ -31,6 +31,17 @@
             text-align: center;
         }
 
+        .celebration {
+            color: #39bdcc;
+            font-family: Impact, Charcoal, sans-serif;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .no-display{
+            display: none;
+        }
+
         #timer div {
             display: inline-block;
         }
@@ -83,10 +94,73 @@
                 border: 2px solid #39bdcc;
             }
 
-
-        #title {
-            
+        .checkbox {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            margin: 10px 0 0 20px;
         }
+
+            .checkbox + label {
+                position: relative;
+                padding: 0 0 0 60px;
+                cursor: pointer;
+            }
+
+                .checkbox + label:before {
+                    content: '';
+                    position: absolute;
+                    top: 6px;
+                    left: 0;
+                    width: 50px;
+                    height: 26px;
+                    border-radius: 13px;
+                    background: #455866;
+                    transition: .2s;
+                }
+
+                .checkbox + label:after {
+                    content: '';
+                    position: absolute;
+                    top: 8px;
+                    left: 2px;
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 10px;
+                    background: #FFF;
+                    transition: .2s;
+                }
+
+            .checkbox:checked + label:before {
+                background: #39bdcc;
+            }
+
+            .checkbox:checked + label:after {
+                left: 26px;
+            }
+
+        input, label {
+            display: inline-block;
+            vertical-align: baseline;
+        }
+
+        .cat-dance {
+            width: 100%;
+            position: relative;
+        }
+
+        .first-cat {
+            position: absolute;
+            left: 120px;
+            top: -330px;
+        }
+
+        .second-cat {
+            position: absolute;
+            right: 120px;
+            top: -330px;
+        }
+
     </style>
     
 </head>
@@ -95,11 +169,11 @@
 
     </div>
     <div class="main">
-		<div>
-			<audio id="music" loop>
-				<source src="tetris.mp3" type="audio/mpeg">
-			</audio>
-		</div>
+        <div>
+            <audio id="music" loop>
+                <source src="tetris.mp3" type="audio/mpeg">
+            </audio>
+        </div>
         <h1 id="title">
             До корпоратива осталось
         </h1>
@@ -136,11 +210,20 @@
             <img src="img/mascotte.png" />
         </div>
         <div id="sound">
-            <input type="checkbox" id="mute" name="mute" title="Добаввить праздника">
-            <label for="mute">Добаввить праздника!</label>
+            <input class="checkbox" type="checkbox" id="mute" name="mute" title="Добавить праздника">
+            <label for="mute">Добавить праздника!</label>
+        </div>
+        <div id="cat" class="celebration no-display">
+            <input class="checkbox" type="checkbox" id="cats" name="cats" title="Добавить еще больше праздника праздника!">
+            <label for="cats">Добавить еще больше праздника праздника!</label>
+        </div>
+        
+        <div class="cat-dance no-display">
+            <img class="first-cat" src="img/1458057342_104.gif" />
+            <img class="second-cat" src="img/1458057342_104.gif" />
         </div>
 
-        <div style="text-align:center; margin-top:50px;">
+        <div style="text-align:center; position:absolute; left:46%; top:620px;">
             <a href="https://docs.google.com/spreadsheets/d/1mo6qfffZ92H_KkYzQtnpBL9BU9-Fi6CUe3mNRC1VXuk/edit#gid=1524227442" target="_blank" class="default-button">Посмотреть смету</a>
         </div>
 
@@ -151,19 +234,39 @@
     
     <script>
 
+        var cssNoDisplayClass = 'no-display';
+        var cssCatDanceClass = 'cat-dance';
+
+        var cat = document.getElementById('cat');
+        var cats = document.getElementById('cats');
+        var catDance = document.getElementsByClassName(cssCatDanceClass);
+
         var music = document.getElementById("music");
         var mute = document.getElementById("mute");
+
 		mute.addEventListener('change', function() {
 		 if(mute.checked) 
 		 {
-			music.play();
+             music.play();
+             cat.classList.toggle(cssNoDisplayClass);
 		 } 
 		 else{
             music.pause();
             music.currentTime = 0;
+             cat.classList.toggle(cssNoDisplayClass);
+             cats.checked = false;
+             catDance[0].classList.toggle(cssNoDisplayClass);
 		 }
 		});
-		
+
+        cats.addEventListener('change', function () {
+            if (cats.checked) {
+                catDance[0].classList.toggle(cssNoDisplayClass);
+            }
+            else {
+                catDance[0].classList.toggle(cssNoDisplayClass);
+            }
+        });
 		
         var timerId;
 
@@ -191,6 +294,7 @@
             var m = result.getUTCMinutes();
             var s = result.getUTCSeconds();
             var ms = result.getUTCMilliseconds();
+            d = checkTime(d);
             h = checkTime(h);
             m = checkTime(m);
             s = checkTime(s);
