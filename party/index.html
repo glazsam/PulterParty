@@ -211,11 +211,11 @@
         </div>
         <div id="sound">
             <input class="checkbox" type="checkbox" id="mute" name="mute" title="Добавить праздника">
-            <label for="mute">Добавить праздника!</label>
+            <label for="mute">Надень наушники и добавить праздника!</label>
         </div>
         <div id="cat" class="celebration no-display">
             <input class="checkbox" type="checkbox" id="cats" name="cats" title="Добавить еще больше праздника праздника!">
-            <label for="cats">Добавить еще больше праздника праздника!</label>
+            <label for="cats">Добавить еще больше праздника!</label>
         </div>
         
         <div class="cat-dance no-display">
@@ -255,7 +255,7 @@
             music.currentTime = 0;
              cat.classList.toggle(cssNoDisplayClass);
              cats.checked = false;
-             catDance[0].classList.toggle(cssNoDisplayClass);
+             catDance[0].classList.add(cssNoDisplayClass);
 		 }
 		});
 
@@ -287,18 +287,25 @@
 
 
         function startTime() {	
+
             var dayD = new Date(2018, 11, 14, 15, 00, 00);
-            var result = new Date(dayD - new Date());
-            var d = result.getUTCDate();
-            var h = result.getUTCHours();
-            var m = result.getUTCMinutes();
-            var s = result.getUTCSeconds();
-            var ms = result.getUTCMilliseconds();
-            d = checkTime(d);
-            h = checkTime(h);
-            m = checkTime(m);
-            s = checkTime(s);
-            ms = checkTime(ms, true);
+
+            var milliseconds = (dayD.getTime() - new Date().getTime());
+            var seconds = Math.floor(milliseconds / 1000);
+            var minutes = Math.floor(seconds / 60);
+            var hours = Math.floor(minutes / 60);
+            var days = Math.floor(hours / 24);
+
+            milliseconds = milliseconds % (seconds * 1000);
+            minutes = minutes % (hours * 60);
+            seconds = seconds % (minutes * 60);
+            hours = hours % (days * 24);
+            
+            ms = checkTime(milliseconds, true);
+            s = checkTime(seconds);
+            m = checkTime(minutes);
+            h = checkTime(hours);
+            d = checkTime(days);
 
             if (!originDate.days) {
                 originDate.days = d;
