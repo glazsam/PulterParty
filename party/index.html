@@ -285,21 +285,35 @@
             millisecond: "millisecond"
         }
 
+        function getTimeRemaining(endtime) {
+            var curDate = Date.parse(new Date());
+            var t = Date.parse(endtime) - curDate;
+            var milliseconds = 000;
+            var seconds = Math.floor((t / 1000) % 60);
+            var minutes = Math.floor((t / 1000 / 60) % 60);
+            var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+            var days = Math.floor(t / (1000 * 60 * 60 * 24));
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds,
+                'milliseconds': milliseconds
+            };
+        }
 
         function startTime() {	
 
-            var dayD = new Date(2018, 11, 14, 15, 00, 00);
+            var partyDay = new Date(2018, 11, 14, 15, 0, 0);
 
-            var milliseconds = (dayD.getTime() - new Date().getTime());
-            var seconds = Math.floor(milliseconds / 1000);
-            var minutes = Math.floor(seconds / 60);
-            var hours = Math.floor(minutes / 60);
-            var days = Math.floor(hours / 24);
+            var total = getTimeRemaining(partyDay).total;
 
-            milliseconds = milliseconds % (seconds * 1000);
-            minutes = minutes % (hours * 60);
-            seconds = seconds % (minutes * 60);
-            hours = hours % (days * 24);
+            var seconds = getTimeRemaining(partyDay).seconds;
+            var minutes = getTimeRemaining(partyDay).minutes;
+            var hours = getTimeRemaining(partyDay).hours;
+            var days = getTimeRemaining(partyDay).days;
+            var milliseconds = getTimeRemaining(partyDay).milliseconds;
             
             ms = checkTime(milliseconds, true);
             s = checkTime(seconds);
