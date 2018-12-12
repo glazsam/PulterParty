@@ -162,8 +162,40 @@
             top: -330px;
         }
 
+
+        .countDown_digit_last_placeholder {
+            background: #ffffff;
+            color: #39bdcc;
+        }
+
+        .countDown_digit_new_placeholder {
+            background: #ffffff;
+            color: #39bdcc;
+        }
+
+        .countDown_digit_last_rotate {
+            background: #ffffff;
+            color: #39bdcc;
+        }
+
+        .countDown_digit_new_rotated {
+            background: #ffffff;
+            color: #39bdcc;
+        }
+
+        .countDown_interval_basic_cont_description {
+            color: #898989;
+        }
+
+        .countDown_interval_basic_cont_description{
+            display: none;
+        }
+
+
     </style>
-    
+
+    <link rel="stylesheet" type="text/css" href="css/timer.css">
+
 </head>
 <body>
     <div class="header">
@@ -178,7 +210,7 @@
         <h1 id="title">
             До корпоратива осталось
         </h1>
-        <div id="timer">
+        <div id="timer" style="display:none;">
             <div>
                 <div class="day type_value">
                 </div>
@@ -206,6 +238,26 @@
                 <div id="millisecond"></div>
             </div>-->
         </div>
+
+        <div class="timer_2">
+            <div class="container">
+                <div class="header__timer"
+                     data-date-start="2018-12-10T00:00:00+04:00"
+                     data-date-end="2018-12-14T15:00:00+04:00"
+                     data-date-now="2018-12-12T15:43:54+04:00">
+                    <span class="header__timer_text"
+                          style="color: #898989; display:none;"
+                          data-counter-text="текст вместо счетчика"
+                          data-counter-text-color="#898989"
+                          data-actions-url="/actions/"></span>
+
+                    <span class="header__timer_counter" data-counter></span>
+                </div>
+            </div>
+        </div>
+
+        
+
 
         <div style="text-align:center;">
             <img src="img/mascotte.png" />
@@ -420,5 +472,6 @@
             startTime();
         });
     </script>
+    <script src="scripts/timer.js"></script>
 </body>
 </html>
