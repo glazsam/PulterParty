@@ -12,6 +12,7 @@
             font-size: 100px;
             cursor: default;
             width: 800px;
+            text-align: center;
         }
 
         #title {
@@ -197,13 +198,13 @@
                 <div class="second type_value">
                 </div>
                 <div id="second"></div>
-            </div>&nbsp;.
-            <div>
+            </div>
+            <!--<div>
                 <div class="millisecond type_value">
                     миллисекунды
                 </div>
                 <div id="millisecond"></div>
-            </div>
+            </div>-->
         </div>
 
         <div style="text-align:center;">
@@ -315,7 +316,7 @@
             var days = getTimeRemaining(partyDay).days;
             var milliseconds = getTimeRemaining(partyDay).milliseconds;
             
-            ms = checkTime(milliseconds, true);
+            //ms = checkTime(milliseconds, true);
             s = checkTime(seconds);
             m = checkTime(minutes);
             h = checkTime(hours);
@@ -363,7 +364,7 @@
                 setNameValue(htmlElementIdEnum.second, s);
             }
 
-            document.getElementById(htmlElementIdEnum.millisecond).innerHTML = ms;
+            //document.getElementById(htmlElementIdEnum.millisecond).innerHTML = ms;
 
 
             timerId = setTimeout(this.startTime, 1);
